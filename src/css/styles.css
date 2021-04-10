@@ -42,6 +42,11 @@ button {
 
 .spin-result {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 800;
   opacity: 1;
   width: 280px;
   height: 120px;
@@ -53,7 +58,6 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 1s ease-in-out;
-  transition-delay: 4s;
 }
 
 .spin {
@@ -95,7 +99,42 @@ button {
   background: linear-gradient(345deg, rgb(45, 33, 216), rgb(16, 10, 94));
   grid-area: brd;
   width: 100%;
+  padding: 20px 10px;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letter-container {
+  height: 50px;
+  width: 35px;
+  margin: 10px 5px;
+  background-color: rgb(238, 235, 228);
+  border: 2px solid black;
+  border-radius: 4px;
+  position: relative;
+}
+
+.board-letter {
+  position: absolute;
+  opacity: 1;
+  background-color: white;
+  border-radius: 4px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 5px;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  transition: opacity 1s ease-in-out;
+}
+
+.board-space {
+  background-color: lightskyblue;
+  opacity: 0.5;
 }
 
 .letters {
@@ -119,11 +158,13 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: opacity 1s ease-in-out;
+
   width: 400px;
 }
 .info-modal > input {
   margin-bottom: 15px;
-  height: 20px;
+  padding: 5px;
   border: none;
   border-radius: 3px;
 }

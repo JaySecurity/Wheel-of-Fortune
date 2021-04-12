@@ -11,17 +11,18 @@
   <body>
     <div class="container">
       <div class="wheel">
-        <div class="spin-result hide"></div>
+        <div class="spin-result"></div>
       </div>
       <div class="controls">
+        <div id="player-msg">Player 1 Spin the Wheel</div>
         <button class="ctrl-btn" id="spin-btn">Spin</button>
         <button class="ctrl-btn" id="buy-vowel-btn">Buy A Vowel</button>
         <div class="vowel-container">
-          <button disabled class="vowel-btn" id="A">A</button>
-          <button disabled class="vowel-btn" id="E">E</button>
-          <button disabled class="vowel-btn" id="I">I</button>
-          <button disabled class="vowel-btn" id="O">O</button>
-          <button disabled class="vowel-btn" id="U">U</button>
+          <button class="vowel-btn" id="A">A</button>
+          <button class="vowel-btn" id="E">E</button>
+          <button class="vowel-btn" id="I">I</button>
+          <button class="vowel-btn" id="O">O</button>
+          <button class="vowel-btn" id="U">U</button>
         </div>
         <button class="ctrl-btn" id="solve-btn">Solve the Puzzle</button>
       </div>
@@ -31,15 +32,16 @@
           <input type="text" name="player-name" id="player-name" />
           <button id="submit-name">Submit</button>
         </div>
+        <div id="catagory"><h2></h2></div>
       </div>
       <div class="letters"></div>
       <div class="players">
         <div id="player1">
-          <h2 class="player1-name">Jason</h2>
+          <h2 class="player1-name">Player 1</h2>
           <h1 class="player1-score">$</h1>
         </div>
         <div id="player2">
-          <h2 class="player2-name">Tom</h2>
+          <h2 class="player2-name">Player 2</h2>
           <h1 class="player2-score">$</h1>
         </div>
       </div>

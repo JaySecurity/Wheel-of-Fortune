@@ -72,6 +72,15 @@ button {
   padding: 60px 0;
 }
 
+#player-msg {
+  background-color: rgb(58, 57, 57);
+  color: #efefef;
+  width: 225px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .controls > button {
   margin: 10px 0;
 }
@@ -106,6 +115,16 @@ button {
   justify-content: center;
 }
 
+#catagory {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  background-color: white;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 350px;
+  padding: 10px;
+}
 .letter-container {
   height: 50px;
   width: 35px;
@@ -159,7 +178,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 1s ease-in-out;
-
+  z-index: 10;
   width: 400px;
 }
 .info-modal > input {
@@ -179,6 +198,11 @@ button {
 
   width: 45%;
   border: 2px solid black;
+}
+
+.current-player {
+  border: 2px solid white;
+  border-radius: 6px;
 }
 
 .info-modal,

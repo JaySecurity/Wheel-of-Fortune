@@ -56,6 +56,7 @@ const buyVowelBtn = document.getElementById('buy-vowel-btn');
 const vowelContainer = document.querySelector('.vowel-container');
 const solveBtn = document.getElementById('solve-btn');
 const board = document.querySelector('.board');
+const puzzleArea = document.querySelector('.puzzle');
 const infoModal = document.querySelector('.info-modal');
 const modalInput = document.getElementById('player-name');
 const modalBtn = document.getElementById('submit-name');
@@ -93,6 +94,7 @@ function createPlayer1() {
     return;
   }
   players[1].name = modalInput.value;
+  players[1].score = 0;
   infoModal.classList.toggle('hide');
   setTimeout(() => {
     infoModal.querySelector('h2').textContent = 'Player 2 Enter Your Name:';
@@ -107,44 +109,51 @@ function createPlayer2() {
     return;
   }
   players[2].name = modalInput.value;
+  players[1].score = 0;
   infoModal.classList.toggle('hide');
   updateGame();
   createPuzzle();
   createLetters();
+  spinBtn.disabled = false;
+  buyVowelBtn.disabled = false;
+  solveBtn.disabled = false;
 }
 
 function createPuzzle() {
   let regex = /[\s',]/;
   puzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
-  console.log(puzzle);
   puzzleArr = puzzle.puzzle.split('');
-  console.log(puzzleArr);
 
   let i = 0;
   while (i < puzzleArr.length) {
     word = document.createElement('div');
-    word.classList.add('word')
+    word.classList.add('word');
     if (puzzleArr[i] === ' ') {
       let letterDiv = document.createElement('div');
       letterDiv.classList.add('letter-container', 'board-space');
-      letterDiv.innerHTML = `<div class='puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
-      board.appendChild(letterDiv);
-      i++
-    }else{
+      letterDiv.innerHTML = `<div class='puzzle-char'>${puzzleArr[
+        i
+      ].toUpperCase()}</div>`;
+      puzzleArea.appendChild(letterDiv);
+      i++;
+    } else {
       while (puzzleArr[i] !== ' ' && i < puzzleArr.length) {
         let letterDiv = document.createElement('div');
         letterDiv.classList.add('letter-container');
         if (regex.test(puzzleArr[i])) {
-          letterDiv.innerHTML = `<div class='special-char puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
+          letterDiv.innerHTML = `<div class='special-char puzzle-char'>${puzzleArr[
+            i
+          ].toUpperCase()}</div>`;
         } else {
-          letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
+          letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${puzzleArr[
+            i
+          ].toUpperCase()}</div>`;
         }
         word.appendChild(letterDiv);
         i++;
       }
-      board.appendChild(word);
+      puzzleArea.appendChild(word);
     }
-    
   }
   catagory.firstChild.textContent = puzzle.catagory.toUpperCase();
   boardLetters = document.querySelectorAll('.puzzle-char');
@@ -185,7 +194,7 @@ function buyVowel() {
   }
 }
 
-// Solve Puzzel
+// Solve Puzzle
 function solvePuzzle() {
   infoModal.querySelector(
     'h2'
@@ -199,16 +208,17 @@ function solvePuzzle() {
     if (!modalInput.value) {
       return;
     }
-    console.log('hide Modal');
     infoModal.classList.toggle('hide');
     if (modalInput.value.trim().toUpperCase() === puzzle.puzzle.toUpperCase()) {
       infoModal.querySelector(
         'h2'
       ).textContent = `Congratulations ${players[currentPlayer].name}! You won with a total of $${players[currentPlayer].score}`;
-      infoModal.removeChild(modalInput);
-      infoModal.removeChild(modalBtn);
-      infoModal.getElementsByClassName.justifyContent = 'center';
-      console.log('show if Correct');
+      modalInput.style.opacity = '0';
+      modalBtn.textContent = 'Play Again';
+      modalBtn.onclick = startGame;
+      spinBtn.disabled = true;
+      buyVowelBtn.disabled = true;
+      solveBtn.disabled = true;
       infoModal.classList.toggle('hide');
     } else {
       infoModal.querySelector(
@@ -280,6 +290,16 @@ function updateGame() {
 }
 // Start Game
 function startGame() {
+  infoModal.classList.add('hide');
+  infoModal.querySelector('h2').textContent = 'Player 1 Enter Your Name:';
+  modalInput.style.opacity = '1';
+  modalInput.value = '';
+  modalInput.focus();
+  modalBtn.textContent = 'Submit';
+  letterContainer.innerHTML = '';
+  puzzleArea.innerHTML = '';
+  vowelContainer.childNodes.forEach((btn) => (btn.disabled = false));
+  modalBtn.onclick = createPlayer1;
   infoModal.classList.toggle('hide');
 }
 

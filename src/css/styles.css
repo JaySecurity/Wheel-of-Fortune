@@ -116,6 +116,12 @@ button {
   align-content: center;
 }
 
+.puzzle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 #catagory {
   position: absolute;
   bottom: 0;

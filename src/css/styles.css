@@ -128,7 +128,7 @@ button {
 .letter-container {
   height: 50px;
   width: 35px;
-  margin: 10px 5px;
+  margin: 30px 2px;
   background-color: rgb(238, 235, 228);
   border: 2px solid black;
   border-radius: 4px;
@@ -154,6 +154,11 @@ button {
 .board-space {
   background-color: lightskyblue;
   opacity: 0.5;
+}
+
+.word {
+  display: flex;
+  margin: 0 10px;
 }
 
 .letters {
@@ -203,6 +208,7 @@ button {
 .current-player {
   border: 2px solid white;
   border-radius: 6px;
+  padding: 10px;
 }
 
 .info-modal,

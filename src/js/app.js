@@ -120,20 +120,46 @@ function createPuzzle() {
   puzzleArr = puzzle.puzzle.split('');
   console.log(puzzleArr);
 
-  puzzleArr.forEach((letter) => {
-    const letterDiv = document.createElement('div');
-    if (regex.test(letter)) {
-      letterDiv.innerHTML = `<div class='special-char puzzle-char'>${letter.toUpperCase()}</div>`;
-      if (letter === ' ') {
-        letterDiv.classList.add('board-space');
+  let i = 0;
+  while (i < puzzleArr.length) {
+    word = document.createElement('div');
+    word.classList.add('word')
+    if (puzzleArr[i] === ' ') {
+      let letterDiv = document.createElement('div');
+      letterDiv.classList.add('letter-container', 'board-space');
+      letterDiv.innerHTML = `<div class='puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
+      board.appendChild(letterDiv);
+      i++
+    }else{
+      while (puzzleArr[i] !== ' ' && i < puzzleArr.length) {
+        let letterDiv = document.createElement('div');
+        letterDiv.classList.add('letter-container');
+        if (regex.test(puzzleArr[i])) {
+          letterDiv.innerHTML = `<div class='special-char puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
+        } else {
+          letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
+        }
+        word.appendChild(letterDiv);
+        i++;
       }
-    } else {
-      letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${letter.toUpperCase()}</div>`;
+      board.appendChild(word);
     }
-    letterDiv.classList.add('letter-container');
-    board.appendChild(letterDiv);
-    catagory.firstChild.textContent = puzzle.catagory.toUpperCase();
-  });
+    
+  }
+  // puzzleArr.forEach((letter) => {
+  //   const letterDiv = document.createElement('div');
+  //   if (regex.test(letter)) {
+  //     letterDiv.innerHTML = `<div class='special-char puzzle-char'>${letter.toUpperCase()}</div>`;
+  //     if (letter === ' ') {
+  //       letterDiv.classList.add('board-space');
+  //     }
+  //   } else {
+  //     letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${letter.toUpperCase()}</div>`;
+  //   }
+  //   letterDiv.classList.add('letter-container');
+  //   board.appendChild(letterDiv);
+  // });
+  catagory.firstChild.textContent = puzzle.catagory.toUpperCase();
   boardLetters = document.querySelectorAll('.puzzle-char');
 }
 

@@ -146,19 +146,6 @@ function createPuzzle() {
     }
     
   }
-  // puzzleArr.forEach((letter) => {
-  //   const letterDiv = document.createElement('div');
-  //   if (regex.test(letter)) {
-  //     letterDiv.innerHTML = `<div class='special-char puzzle-char'>${letter.toUpperCase()}</div>`;
-  //     if (letter === ' ') {
-  //       letterDiv.classList.add('board-space');
-  //     }
-  //   } else {
-  //     letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${letter.toUpperCase()}</div>`;
-  //   }
-  //   letterDiv.classList.add('letter-container');
-  //   board.appendChild(letterDiv);
-  // });
   catagory.firstChild.textContent = puzzle.catagory.toUpperCase();
   boardLetters = document.querySelectorAll('.puzzle-char');
 }
@@ -184,7 +171,7 @@ function handleSpin() {
         spinResultModal.classList.toggle('hide');
         spinBtn.disabled = false;
         updateGame();
-      }, 500);
+      }, 1500);
     }
   }, 4500);
 }

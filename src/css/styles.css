@@ -6,6 +6,7 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: darkslategray;
 }
 
 button {
@@ -14,8 +15,6 @@ button {
 }
 
 .container {
-  border: 1px solid black;
-  background-color: darkslategray;
   margin: 20px auto;
   height: 95vh;
   width: 100vw;

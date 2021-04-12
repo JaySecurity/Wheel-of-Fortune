@@ -20,14 +20,14 @@ const spinAmounts = [
   '750',
 ];
 const puzzles = [
-  { catagory: 'Horror Movies', puzzle: 'Night of the Living Dead' },
-  { catagory: 'Horror Movies', puzzle: 'Day of the Dead' },
-  { catagory: 'Horror Movies', puzzle: 'Dawn of the Dead' },
-  { catagory: 'Horror Movies', puzzle: 'Land of the Dead' },
-  { catagory: 'Prison Movies', puzzle: 'The Green Mile' },
-  { catagory: 'Prison Movies', puzzle: 'The Shawshank Redemption' },
-  { catagory: 'Prison Movies', puzzle: 'Ernest goes to jail' },
-  { catagory: 'Prison Movies', puzzle: 'Con Air' },
+  { category: 'Horror Movies', puzzle: 'Night of the Living Dead' },
+  { category: 'Horror Movies', puzzle: 'Day of the Dead' },
+  { category: 'Horror Movies', puzzle: 'Dawn of the Dead' },
+  { category: 'Horror Movies', puzzle: 'Land of the Dead' },
+  { category: 'Prison Movies', puzzle: 'The Green Mile' },
+  { category: 'Prison Movies', puzzle: 'The Shawshank Redemption' },
+  { category: 'Prison Movies', puzzle: 'Ernest goes to jail' },
+  { category: 'Prison Movies', puzzle: 'Con Air' },
 ];
 const players = {
   1: {
@@ -60,7 +60,7 @@ const puzzleArea = document.querySelector('.puzzle');
 const infoModal = document.querySelector('.info-modal');
 const modalInput = document.getElementById('player-name');
 const modalBtn = document.getElementById('submit-name');
-const catagory = document.getElementById('catagory');
+const category = document.getElementById('category');
 const letterContainer = document.querySelector('.letters');
 const player1Name = document.querySelector('.player1-name');
 const player1Score = document.querySelector('.player1-score');
@@ -155,7 +155,7 @@ function createPuzzle() {
       puzzleArea.appendChild(word);
     }
   }
-  catagory.firstChild.textContent = puzzle.catagory.toUpperCase();
+  category.firstChild.textContent = puzzle.category.toUpperCase();
   boardLetters = document.querySelectorAll('.puzzle-char');
 }
 

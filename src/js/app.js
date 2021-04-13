@@ -131,9 +131,8 @@ function createPuzzle() {
     if (puzzleArr[i] === ' ') {
       let letterDiv = document.createElement('div');
       letterDiv.classList.add('letter-container', 'board-space');
-      letterDiv.innerHTML = `<div class='puzzle-char'>${puzzleArr[
-        i
-      ].toUpperCase()}</div>`;
+      // prettier-ignore
+      letterDiv.innerHTML = `<div class='puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
       puzzleArea.appendChild(letterDiv);
       i++;
     } else {
@@ -141,13 +140,11 @@ function createPuzzle() {
         let letterDiv = document.createElement('div');
         letterDiv.classList.add('letter-container');
         if (regex.test(puzzleArr[i])) {
-          letterDiv.innerHTML = `<div class='special-char puzzle-char'>${puzzleArr[
-            i
-          ].toUpperCase()}</div>`;
+          // prettier-ignore
+          letterDiv.innerHTML = `<div class='special-char puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
         } else {
-          letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${puzzleArr[
-            i
-          ].toUpperCase()}</div>`;
+          // prettier-ignore
+          letterDiv.innerHTML = `<div class='hide board-letter puzzle-char'>${puzzleArr[i].toUpperCase()}</div>`;
         }
         word.appendChild(letterDiv);
         i++;

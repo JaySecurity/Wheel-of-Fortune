@@ -40,11 +40,6 @@ const players = {
   },
 };
 
-// Sounds
-let bankruptSound = new Audio('../assets/sounds/bankrupt.mp3');
-let solveSound = new Audio('../assets/sounds/puzzleSolve.mp3');
-let spinSound = new Audio('../assets/sounds/wheelSpin.wav');
-
 //-------------------------- Global Variables --------------------------//
 let currentPlayer = 1;
 let puzzleArr = [];
@@ -71,7 +66,12 @@ const player1Name = document.querySelector('.player1-name');
 const player1Score = document.querySelector('.player1-score');
 const player2Name = document.querySelector('.player2-name');
 const player2Score = document.querySelector('.player2-score');
-
+const spinSound = document.getElementById('spin-sound');
+const bankruptSound = document.getElementById('bankrupt-sound');
+const solveSound = document.getElementById('solve-sound');
+const puzzleReveal = document.getElementById('puzzle-reveal');
+const dingSound = document.getElementById('ding');
+const buzzerSound = document.getElementById('buzzer');
 //-----------------------Attach Event Listeners-------------------------//
 
 spinBtn.addEventListener('click', handleSpin);
@@ -159,6 +159,7 @@ function createPuzzle() {
   }
   category.firstChild.textContent = puzzle.category.toUpperCase();
   boardLetters = document.querySelectorAll('.puzzle-char');
+  puzzleReveal.play();
 }
 
 // Handle spin Function
@@ -178,6 +179,9 @@ function handleSpin() {
       setTimeout(() => {
         if (spinResult === 'BANKRUPT') {
           players[currentPlayer].score = 0;
+          bankruptSound.play();
+        } else {
+          buzzerSound.play();
         }
         currentPlayer === 1 ? (currentPlayer = 2) : (currentPlayer = 1);
         spinResultModal.classList.toggle('hide');
@@ -185,7 +189,7 @@ function handleSpin() {
         updateGame();
       }, 1500);
     }
-  }, 4500);
+  }, 3000);
 }
 
 // Buy A Vowel
@@ -213,6 +217,7 @@ function solvePuzzle() {
     }
     infoModal.classList.toggle('hide');
     if (modalInput.value.trim().toUpperCase() === puzzle.puzzle.toUpperCase()) {
+      solveSound.play();
       infoModal.querySelector(
         'h2'
       ).textContent = `Congratulations ${players[currentPlayer].name}! You won with a total of $${players[currentPlayer].score}`;
@@ -254,6 +259,7 @@ function pickLetter(e) {
     calcScore(indexArr);
     updateGame();
   } else {
+    buzzerSound.play();
     currentPlayer === 1 ? (currentPlayer = 2) : (currentPlayer = 1);
     updateGame();
   }
@@ -261,11 +267,20 @@ function pickLetter(e) {
 
 // Flip Board Letters
 function flipLetters(indexArr) {
-  indexArr.forEach((index) => {
-    boardLetters[index].classList.remove('hide');
-  });
+  let i = 0;
+  let id = setInterval(() => {
+    boardLetters[indexArr[i]].classList.remove('hide');
+    dingSound.play();
+    i++;
+    if (i >= indexArr.length) {
+      clearInterval(id);
+    }
+  }, 1200);
 }
-
+//   indexArr.forEach((index) => {
+//     boardLetters[index].classList.remove('hide');
+//   });
+// }
 //Calculate Score
 function calcScore(indexArr) {
   if (spinResult === 'vowel') {

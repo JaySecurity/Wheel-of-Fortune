@@ -231,6 +231,10 @@ function solvePuzzle() {
     }
     infoModal.classList.toggle('hide');
     if (modalInput.value.trim().toUpperCase() === puzzle.puzzle.toUpperCase()) {
+      if (players[currentPlayer].score < 1000) {
+        players[currentPlayer].score = 1000;
+        updateGame();
+      }
       solveSound.play();
       infoModal.querySelector(
         'h2'

@@ -34,7 +34,7 @@ button {
 }
 
 .wheel {
-  background: white url('../assets/images/wheel2.svg');
+  background: url('../assets/images/wheel.svg');
   background-size: contain;
   margin: auto;
   grid-area: whl;
@@ -42,6 +42,7 @@ button {
   height: 350px;
   border-radius: 50%;
   position: relative;
+  transition: transform 2s ease-out;
 }
 
 .pointer {

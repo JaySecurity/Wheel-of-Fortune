@@ -2,22 +2,30 @@
 const letters = 'BCDFGHJKLMNPQRSTVWXYZ';
 const letterArr = letters.split('');
 const spinAmounts = [
-  '100',
-  '250',
-  '350',
+  '200',
+  '1000',
+  '600',
+  '300',
+  '700',
   '450',
+  '100',
+  '800',
+  'LOSE A TURN',
+  '250',
+  '400',
   '500',
   'BANKRUPT',
+  '900',
+  '300',
   '250',
-  '350',
-  '450',
-  'LOSE A TURN',
+  '900',
+  '200',
+  '400',
+  '550',
+  '200',
   '500',
-  '100',
-  '250',
-  '350',
-  '1000',
-  '750',
+  'LOSE A TURN',
+  '600',
 ];
 const puzzles = [
   { category: 'Horror Movies', puzzle: 'Night of the Living Dead' },
@@ -169,7 +177,10 @@ function handleSpin() {
   spinSound.play();
   setTimeout(() => {
     wheel.classList.toggle('spin');
-    spinResult = spinAmounts[Math.floor(Math.random() * spinAmounts.length)];
+    let index = Math.floor(Math.random() * spinAmounts.length);
+    spinResult = spinAmounts[index];
+    wheel.style.transform = `rotateZ(${index * 15}deg)`;
+    spinResultModal.style.transform = `rotateZ(${index * -15}deg)`;
     spinResultModal.textContent = spinResult;
     spinResultModal.classList.remove('hide');
     if (spinResult != 'BANKRUPT' && spinResult != 'LOSE A TURN') {
@@ -277,10 +288,7 @@ function flipLetters(indexArr) {
     }
   }, 1200);
 }
-//   indexArr.forEach((index) => {
-//     boardLetters[index].classList.remove('hide');
-//   });
-// }
+
 //Calculate Score
 function calcScore(indexArr) {
   if (spinResult === 'vowel') {

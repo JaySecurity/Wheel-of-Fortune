@@ -40,6 +40,11 @@ const players = {
   },
 };
 
+// Sounds
+let bankruptSound = new Audio('../assets/sounds/bankrupt.mp3');
+let solveSound = new Audio('../assets/sounds/puzzleSolve.mp3');
+let spinSound = new Audio('../assets/sounds/wheelSpin.wav');
+
 //-------------------------- Global Variables --------------------------//
 let currentPlayer = 1;
 let puzzleArr = [];
@@ -160,6 +165,7 @@ function createPuzzle() {
 function handleSpin() {
   spinBtn.setAttribute('disabled', 'true');
   wheel.classList.toggle('spin');
+  spinSound.play();
   setTimeout(() => {
     wheel.classList.toggle('spin');
     spinResult = spinAmounts[Math.floor(Math.random() * spinAmounts.length)];

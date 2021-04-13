@@ -29,7 +29,7 @@ button {
 }
 
 .wheel {
-  background: url('../images/wheel.png');
+  background: url('../assets/images/wheel.png');
   background-size: contain;
   margin: auto;
   grid-area: whl;

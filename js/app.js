@@ -57,6 +57,7 @@ let spinResult;
 
 //-------------------------- Grab Dom Elements -------------------------//
 const wheel = document.querySelector('.wheel');
+const pointer = document.querySelector('.pointer');
 const spinBtn = document.getElementById('spin-btn');
 const playerMsg = document.getElementById('player-msg');
 const spinResultModal = document.querySelector('.spin-result');
@@ -174,8 +175,10 @@ function createPuzzle() {
 function handleSpin() {
   spinBtn.setAttribute('disabled', 'true');
   wheel.classList.toggle('spin');
+  pointer.classList.toggle('ticker');
   spinSound.play();
   setTimeout(() => {
+    pointer.classList.toggle('ticker');
     wheel.classList.toggle('spin');
     let index = Math.floor(Math.random() * spinAmounts.length);
     spinResult = spinAmounts[index];

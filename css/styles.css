@@ -28,6 +28,11 @@ button {
     'ctrl players';
 }
 
+.wheel-wrapper {
+  margin: auto;
+  position: relative;
+}
+
 .wheel {
   background: white url('../assets/images/wheel2.svg');
   background-size: contain;
@@ -37,6 +42,23 @@ button {
   height: 350px;
   border-radius: 50%;
   position: relative;
+}
+
+.pointer {
+  width: 1px;
+  z-index: 2;
+  position: absolute;
+  top: -70px;
+  left: 51%;
+  border-top: 80px solid black;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  transform: rotateZ(10deg);
+  transform-origin: top;
+}
+
+.ticker {
+  animation: wiggle 500ms linear infinite;
 }
 
 .spin-result {
@@ -255,5 +277,23 @@ button {
   }
   100% {
     transform: rotateZ(360deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(-10deg);
+  }
+  75% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(10deg);
   }
 }

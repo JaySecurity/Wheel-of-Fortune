@@ -87,6 +87,7 @@ spinBtn.addEventListener('click', handleSpin);
 modalBtn.onclick = createPlayer1;
 buyVowelBtn.addEventListener('click', buyVowel);
 solveBtn.addEventListener('click', solvePuzzle);
+// modalInput.addEventListener('keypress', handleKeypress);
 
 //-------------------------- Game Functions ----------------------------//
 
@@ -123,14 +124,11 @@ function createPlayer2() {
     return;
   }
   players[2].name = modalInput.value;
-  players[1].score = 0;
+  players[2].score = 0;
   infoModal.classList.toggle('hide');
-  updateGame();
   createPuzzle();
   createLetters();
-  spinBtn.disabled = false;
-  buyVowelBtn.disabled = false;
-  solveBtn.disabled = false;
+  updateGame();
 }
 
 function createPuzzle() {
@@ -173,7 +171,7 @@ function createPuzzle() {
 
 // Handle spin Function
 function handleSpin() {
-  spinBtn.setAttribute('disabled', 'true');
+  toggleButtons(true);
   wheel.classList.toggle('spin');
   pointer.classList.toggle('ticker');
   spinSound.play();
@@ -206,9 +204,17 @@ function handleSpin() {
   }, 3000);
 }
 
+// Handle Keypress
+function handleKeypress(e) {
+  if (e.which === 13) {
+    modalBtn.onclick();
+  }
+}
+
 // Buy A Vowel
 function buyVowel() {
   if (players[currentPlayer].score >= 250) {
+    toggleButtons(true);
     vowelContainer.addEventListener('click', pickLetter);
     playerMsg.textContent = `${players[currentPlayer].name} Choose a Vowel`;
     spinResult = 'vowel';
@@ -224,6 +230,9 @@ function solvePuzzle() {
   modalInput.focus();
   modalBtn.onclick = submitAnswer;
   infoModal.classList.toggle('hide');
+  toggleButtons(true);
+  modalBtn.disabled = false;
+  // modalInput.onkeypress = handleKeypress;
 
   function submitAnswer() {
     if (!modalInput.value) {
@@ -233,7 +242,6 @@ function solvePuzzle() {
     if (modalInput.value.trim().toUpperCase() === puzzle.puzzle.toUpperCase()) {
       if (players[currentPlayer].score < 1000) {
         players[currentPlayer].score = 1000;
-        updateGame();
       }
       solveSound.play();
       infoModal.querySelector(
@@ -242,11 +250,11 @@ function solvePuzzle() {
       modalInput.style.opacity = '0';
       modalBtn.textContent = 'Play Again';
       modalBtn.onclick = startGame;
-      spinBtn.disabled = true;
-      buyVowelBtn.disabled = true;
-      solveBtn.disabled = true;
+      toggleButtons(false);
       infoModal.classList.toggle('hide');
     } else {
+      modalBtn.disabled = true;
+      //  modalInput.removeEventListener('keypress', handleKeypress);
       infoModal.querySelector(
         'h2'
       ).textContent = `Sorry ${players[currentPlayer].name}. That is incorrect`;
@@ -262,24 +270,25 @@ function solvePuzzle() {
 
 // Pick a Letter Handler
 function pickLetter(e) {
-  vowelContainer.removeEventListener('click', pickLetter);
-  letterContainer.removeEventListener('click', pickLetter);
-  let chosenLetter = e.target.textContent;
-  e.target.disabled = true;
-  let indexArr = [];
-  puzzleArr.forEach((letter, i) => {
-    if (chosenLetter === letter.toUpperCase()) {
-      indexArr.push(i);
+  if (e.target.classList.contains('letter-btn')) {
+    vowelContainer.removeEventListener('click', pickLetter);
+    letterContainer.removeEventListener('click', pickLetter);
+    let chosenLetter = e.target.textContent;
+    e.target.disabled = true;
+    let indexArr = [];
+    puzzleArr.forEach((letter, i) => {
+      if (chosenLetter === letter.toUpperCase()) {
+        indexArr.push(i);
+      }
+    });
+    if (indexArr.length > 0) {
+      flipLetters(indexArr);
+      calcScore(indexArr);
+    } else {
+      buzzerSound.play();
+      currentPlayer === 1 ? (currentPlayer = 2) : (currentPlayer = 1);
+      updateGame();
     }
-  });
-  if (indexArr.length > 0) {
-    flipLetters(indexArr);
-    calcScore(indexArr);
-    updateGame();
-  } else {
-    buzzerSound.play();
-    currentPlayer === 1 ? (currentPlayer = 2) : (currentPlayer = 1);
-    updateGame();
   }
 }
 
@@ -294,6 +303,7 @@ function flipLetters(indexArr) {
       clearInterval(id);
     }
   }, 1200);
+  setTimeout(updateGame, 1200 * indexArr.length);
 }
 
 //Calculate Score
@@ -305,13 +315,13 @@ function calcScore(indexArr) {
   }
 }
 
+// Game Update Function
 function updateGame() {
   player1Name.textContent = players[1].name;
   player1Score.textContent = `$${players[1].score}`;
   player2Name.textContent = players[2].name;
   player2Score.textContent = `$${players[2].score}`;
   playerMsg.textContent = `${players[currentPlayer].name} Make a Choice:`;
-  spinBtn.disabled = false;
   spinResultModal.classList.add('hide');
   if (currentPlayer === 1) {
     player1Name.classList.add('current-player');
@@ -320,7 +330,17 @@ function updateGame() {
     player2Name.classList.add('current-player');
     player1Name.classList.remove('current-player');
   }
+  toggleButtons(false);
+  // modalInput.onkeypress = handleKeypress;
 }
+
+function toggleButtons(state) {
+  spinBtn.disabled = state;
+  buyVowelBtn.disabled = state;
+  solveBtn.disabled = state;
+  modalBtn.disabled = state;
+}
+
 // Start Game
 function startGame() {
   infoModal.classList.add('hide');

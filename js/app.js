@@ -84,10 +84,10 @@ const buzzerSound = document.getElementById('buzzer');
 //-----------------------Attach Event Listeners-------------------------//
 
 spinBtn.addEventListener('click', handleSpin);
-modalBtn.onclick = createPlayer1;
 buyVowelBtn.addEventListener('click', buyVowel);
 solveBtn.addEventListener('click', solvePuzzle);
-// modalInput.addEventListener('keypress', handleKeypress);
+modalBtn.onclick = createPlayer1;
+modalInput.onkeypress = handleKeypress;
 
 //-------------------------- Game Functions ----------------------------//
 
@@ -317,9 +317,9 @@ function calcScore(indexArr) {
 
 // Game Update Function
 function updateGame() {
-  player1Name.textContent = players[1].name;
+  player1Name.textContent = players[1].name.toUpperCase();
   player1Score.textContent = `$${players[1].score}`;
-  player2Name.textContent = players[2].name;
+  player2Name.textContent = players[2].name.toUpperCase();
   player2Score.textContent = `$${players[2].score}`;
   playerMsg.textContent = `${players[currentPlayer].name} Make a Choice:`;
   spinResultModal.classList.add('hide');
@@ -343,6 +343,7 @@ function toggleButtons(state) {
 
 // Start Game
 function startGame() {
+  currentPlayer = 1;
   infoModal.classList.add('hide');
   infoModal.querySelector('h2').textContent = 'Player 1 Enter Your Name:';
   modalInput.style.opacity = '1';

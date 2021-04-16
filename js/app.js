@@ -232,7 +232,6 @@ function solvePuzzle() {
   infoModal.classList.toggle('hide');
   toggleButtons(true);
   modalBtn.disabled = false;
-  // modalInput.onkeypress = handleKeypress;
 
   function submitAnswer() {
     if (!modalInput.value) {
@@ -331,7 +330,6 @@ function updateGame() {
     player1Name.classList.remove('current-player');
   }
   toggleButtons(false);
-  // modalInput.onkeypress = handleKeypress;
 }
 
 function toggleButtons(state) {
